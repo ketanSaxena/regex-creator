@@ -13,8 +13,18 @@ import {
   Alert,
   IconButton,
   Tooltip,
+  InputAdornment,
+  AppBar,
+  Toolbar,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import { AccountCircle, GitHub } from '@mui/icons-material';
 
 type TestResult = boolean | null;
 
@@ -26,6 +36,9 @@ export default function Home() {
   const [error, setError] = useState<string>('');
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [tooltipOpen, setTooltipOpen] = useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClose = () => setAnchorEl(null);
 
   const handleGenerateRegex = async () => {
     try {
@@ -36,24 +49,6 @@ export default function Home() {
     } catch (error) {
       console.error('Error generating regex:', error);
       setError('Failed to generate regex. Please try again.');
-    }
-  };
-
-  const handleTestRegex = () => {
-    try {
-      // Extract the pattern and flags from the generated regex
-      const regexParts = generatedRegex.match(/^\/(.+)\/([a-z]*)$/);
-      if (!regexParts) {
-        setError('Invalid regex format.');
-        return;
-      }
-
-      const pattern = regexParts[1];
-      const flags = regexParts[2];
-      const regex = new RegExp(pattern, flags);
-      setTestResult(regex.test(testString));
-    } catch (e) {
-      setError('Invalid regex.');
     }
   };
 
@@ -105,13 +100,57 @@ export default function Home() {
       sx={{
         minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
-        padding: 2,
+        flexDirection: 'column',
+        background: 'linear-gradient(to right, #6C5B7B, #2C3E50)',
       }}
     >
-      <Container maxWidth="sm">
+      <AppBar position="static">
+      <Toolbar>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Online Regex Generator
+          </Typography>
+          <Typography variant="body1" style={{ marginRight: "8px" }}>
+            App Info
+          </Typography>
+          <IconButton
+            color="inherit"
+            onClick={(event) => setAnchorEl(event.currentTarget)}
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={handleClose}
+              component="a"
+              href="https://github.com/ketanSaxena"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ListItemIcon>
+                <GitHub fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Git Repository</ListItemText>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              component="a"
+              href="https://www.linkedin.com/in/ketan-saxena-157b2878/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ListItemIcon>
+                <AccountCircle fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Author Info</ListItemText>
+            </MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm" style={{marginTop: '2rem'}}>
         <Paper elevation={3} style={{ padding: '20px' }}>
           <Typography variant="h4" align="center" gutterBottom>
             Regex Generator
@@ -139,12 +178,12 @@ export default function Home() {
             </Button>
           </Box>
 
-          {generatedRegex && (
+          
               <Box mt={4}>
                 <Typography variant="h6" display="flex" alignItems="center">
                   Generated Regex
                   <Tooltip
-                    title="Copy to clipboard"
+                    title="Copied to clipboard"
                     open={tooltipOpen}
                     disableFocusListener
                     disableHoverListener
@@ -159,9 +198,9 @@ export default function Home() {
                     </IconButton>
                   </Tooltip>
                 </Typography>
-                <Paper style={{ padding: '10px', backgroundColor: '#f5f5f5' }}>
-                  <Typography variant="body1" style={{ fontFamily: 'monospace' }}>
-                    {generatedRegex}
+                <Paper style={{ padding: '10px', backgroundColor: '#f5f5f5', minHeight: '40px' }}>
+                  <Typography variant={generatedRegex ? 'body1' : 'caption'} style={{ fontFamily: 'monospace' }}>
+                    {generatedRegex || 'Generated regex will appear here...'}
                   </Typography>
                 </Paper>
 
@@ -170,26 +209,38 @@ export default function Home() {
                     label="Test your regex"
                     variant="outlined"
                     fullWidth
+                    disabled={generatedRegex.length === 0}
                     value={testString}
                     onChange={handleTestStringChange}
-                    error={testResult !== null && testResult === false}
+                    color={testString.length ? (testResult === false ? 'error' : 'success') : 'info'}
+                    InputProps={{
+                      endAdornment: generatedRegex.length && testString.length ? (<InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        edge="end"
+                      >
+                        {testResult === false ? <ErrorIcon color='error' /> : <CheckCircleIcon color='success'/>}
+                      </IconButton>
+                    </InputAdornment>) : null
+                    }}
                   />
                 </Box>
-                <Box mt={1} display="flex" justifyContent="center" width="100%">
-                  {testResult!== null && <Alert severity={testResult ? 'success' : 'error'} style={{ width: '100%' }}>
+                {/* <Box mt={1} display="flex" justifyContent="center" width="100%">
+                  {testResult!== null && testString && <Alert severity={testResult ? 'success' : 'error'} style={{ width: '100%' }}>
                     {testResult ? 'Test passed!' : 'Test failed.'}
                   </Alert>}
-                </Box>
+                </Box> */}
               </Box>
-            )}
+            
 
-          {error && (
+          
             <Box mt={3}>
+            {error && (
               <Alert severity="error" onClose={() => setError('')}>
                 {error}
               </Alert>
+            )}
             </Box>
-          )}
         </Paper>
 
         <Snackbar
