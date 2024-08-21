@@ -1,22 +1,29 @@
-# Regex Creator
+# Regex Creator - Powered by ChatGPT AI
 
-Regex Creator is a user-friendly web application that allows users to generate and test regular expressions (regex) with ease. Inspired by popular tools like regex101, this tool provides a streamlined interface for regex creation and testing, making it easier to validate and match patterns in strings.
+Regex Creator is a web application that leverages the power of OpenAI's ChatGPT to generate regular expressions (regex) based on natural language descriptions. Whether you're a developer, data scientist, or just someone looking to validate text patterns, Regex Creator makes it easy to generate and test complex regex patterns with minimal effort.
 
-## Features
+## Key Features
 
-- **Generate Regex**: Describe your validation needs, and the app will generate a regex pattern for you.
-- **Real-time Testing**: Test your generated regex against input strings in real-time with instant feedback.
-- **Copy to Clipboard**: Easily copy the generated regex to your clipboard for use in your projects.
-- **Responsive Design**: The application is fully responsive, providing a seamless experience across devices.
-- **Professional UI**: A clean and modern UI inspired by regex101, ensuring a professional look and feel.
+- **AI-Powered Regex Generation**: Describe your desired text pattern in plain English, and Regex Creator will generate the corresponding regex using OpenAI's ChatGPT model.
+- **Real-Time Regex Testing**: Test your generated regex against sample strings in real-time to ensure it works as expected.
+- **Copy to Clipboard**: Quickly copy the generated regex to your clipboard for use in your projects with just a click.
+- **Professional UI**: A clean and modern user interface inspired by popular tools like regex101, providing a seamless user experience.
+- **Responsive Design**: Optimized for use on any device, whether you're on a desktop or mobile.
 
 ## Technologies Used
 
-- **Next.js**: React framework for server-side rendering and generating static websites.
-- **TypeScript**: Superset of JavaScript for static type checking.
-- **Material-UI (MUI)**: React UI framework for designing and implementing user interfaces.
-- **MongoDB Atlas**: Cloud-based NoSQL database for storing and retrieving regex patterns.
-- **OpenAI API**: Integration with OpenAI's GPT model to generate regex patterns based on user input.
+- **Next.js**: A powerful React framework for server-side rendering and static site generation.
+- **TypeScript**: Ensures type safety and improved developer experience.
+- **Material-UI (MUI)**: A popular React UI framework for building modern and responsive user interfaces.
+- **MongoDB Atlas**: A cloud-based NoSQL database for storing and retrieving regex patterns.
+- **OpenAI GPT**: The core AI model used to generate regex patterns from natural language descriptions.
+
+## How It Works
+
+1. **Natural Language Input**: Users input a natural language description of the validation pattern they need (e.g., "only allow alphanumeric characters").
+2. **ChatGPT AI Processing**: The application sends the description to OpenAI's ChatGPT API, which generates the corresponding regex pattern.
+3. **Regex Generation**: The generated regex is returned and displayed on the interface for immediate testing and usage.
+4. **Real-Time Feedback**: Users can input test strings to see if they match the generated regex in real-time, with immediate visual feedback.
 
 ## Getting Started
 
@@ -31,7 +38,7 @@ Regex Creator is a user-friendly web application that allows users to generate a
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/regex-creator.git
+    git clone https://github.com/ketanSaxena/regex-creator.git
     cd regex-creator
     ```
 
@@ -58,10 +65,10 @@ Regex Creator is a user-friendly web application that allows users to generate a
 
 ## Usage
 
-1. Enter your validation description in the provided text area.
-2. Click "Generate Regex" or press enter to generate the regex pattern.
-3. Test your generated regex by typing a string in the "Test your regex" input field.
-4. Copy the generated regex to your clipboard using the copy icon for use in your projects.
+1. **Enter Description**: Type your validation description in plain English.
+2. **Generate Regex**: The AI processes your input and generates the appropriate regex pattern.
+3. **Test Regex**: Use the test string input to verify the regex's functionality.
+4. **Copy and Use**: Easily copy the regex to your clipboard for use in your projects.
 
 ## Contributing
 
@@ -73,6 +80,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgements
 
+- Powered by [OpenAI GPT](https://beta.openai.com/)
 - Inspired by [regex101](https://regex101.com/)
 - Built with [Next.js](https://nextjs.org/) and [Material-UI](https://mui.com/)
-
