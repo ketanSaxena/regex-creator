@@ -1,6 +1,7 @@
 # Regex Creator - Powered by ChatGPT AI
 
 Regex Creator is a web application that leverages the power of OpenAI's ChatGPT to generate regular expressions (regex) based on natural language descriptions. Whether you're a developer, data scientist, or just someone looking to validate text patterns, Regex Creator makes it easy to generate and test complex regex patterns with minimal effort.
+### [Online Demo - Regex Creator](https://regex-creator.vercel.app/)
 
 ## Key Features
 
@@ -13,6 +14,7 @@ Regex Creator is a web application that leverages the power of OpenAI's ChatGPT 
 ## Technologies Used
 
 - **Next.js**: A powerful React framework for server-side rendering and static site generation.
+- **Vercel**: Hosted with Vercel using SSR react app and serverless server methods
 - **TypeScript**: Ensures type safety and improved developer experience.
 - **Material-UI (MUI)**: A popular React UI framework for building modern and responsive user interfaces.
 - **MongoDB Atlas**: A cloud-based NoSQL database for storing and retrieving regex patterns.
